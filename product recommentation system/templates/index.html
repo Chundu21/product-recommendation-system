@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Generator System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script>
+        function fillInput(item) {
+            document.getElementById('item').value = item;
+            document.getElementById('productForm').submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Product Recommendations System</h1>
+        <form method="post" id="productForm">
+            <div class="form-group">
+                <label for="item">Enter an Item:</label>
+                <input type="text" class="form-control" id="item" name="item" placeholder="Enter an item" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add to Bill & Get Recommendations</button>
+        </form>
+
+        <h2 class="mt-5">Current Bill:</h2>
+        <ul class="list-group" id="bill">
+            {% for product in bill %}
+            <li class="list-group-item">{{ product }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if recommendations %}
+        <h2 class="mt-5">Recommended Items:</h2>
+        <div>
+            {% for recommendation in recommendations %}
+            <button type="button" class="btn btn-secondary m-1" onclick="fillInput('{{ recommendation }}')">{{ recommendation }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
